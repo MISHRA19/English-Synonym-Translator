@@ -1,18 +1,21 @@
-Translate Function that calls the Datamuse API
+# Import Libraries
+import requests
+import json
+
+#Translate Function that calls the Datamuse API
 def translate(lst):
     tran=[]
     for i in lst:
         baseurl = "https://api.datamuse.com/words"
         params_diction = {} # Set up an empty dictionary for query parameters
         params_diction["ml"] = i
-        params_diction["max"] = "1" # get at most 3 results
-        resp = requests.get(baseurl, params=params_diction)
+        params_diction["max"] = "1" # This will fetch one result
+        resp = requests.get(baseurl, params=params_diction) # Fetching data in json format
         word_ds = resp.json()
         tran.append([d['word'] for d in word_ds])
     return tran
-        
-
-inp=input("Enter string to be translated:")
+     
+inp=input("Enter string to be translated:") # Would open up a dialog box for user Input
 print(inp)
 lst=inp.split()
 #print(lst)
